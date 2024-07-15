@@ -5,6 +5,7 @@ const port = process.env.PORT | 8000;
 import posts from "./routes/posts.js";
 import errorHandler from "./middleware/error.js";
 import logger from "./middleware/logger.js";
+import notFound from "./middleware/notFound.js";
 // setup static folder
 // app.use(express.static(path.join(__dirname, "public")));
 // Body parser middleware
@@ -15,8 +16,7 @@ app.use(logger);
 // Routes
 app.use("/api/posts", posts);
 
-app.get("/test", (req, res) => res.json({ message: "Test is working" }));
-
 // Error Handler Middleware
+app.use(notFound);
 app.use(errorHandler);
 app.listen(port, () => console.log("Server is running at " + port));

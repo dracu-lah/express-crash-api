@@ -33,6 +33,7 @@ app.use(logger);
 
 // Routes
 app.use("/api/posts", posts);
+app.use("/api/auth", posts);
 
 // Error Handler Middleware
 app.use(notFound);

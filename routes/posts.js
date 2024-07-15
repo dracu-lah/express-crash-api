@@ -6,10 +6,11 @@ import {
   getPosts,
   updatePost,
 } from "../controllers/postController.js";
+import authenticateToken from "../middleware/authenticateToken.js";
 const router = express.Router();
 
 // Get all posts
-router.get("/", getPosts);
+router.get("/", authenticateToken, getPosts);
 
 // Get single post
 router.get("/:id", getPost);

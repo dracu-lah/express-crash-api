@@ -1,5 +1,7 @@
+// models/Post.js
+
 import { DataTypes } from "sequelize";
-import sequelize from "../config/sequelize";
+import sequelize from "../config/sequelize"; // Ensure this path is correct
 
 const Post = sequelize.define("Post", {
   title: {
@@ -8,4 +10,5 @@ const Post = sequelize.define("Post", {
   },
 });
 
+// Export the Post model
 export default Post;

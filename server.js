@@ -22,12 +22,6 @@ import logger from "./middleware/logger.js";
 import notFound from "./middleware/notFound.js";
 import sequelize from "./config/sequelize.js";
 
-try {
-  await sequelize.authenticate();
-  console.log("Connection has been established successfully.");
-} catch (error) {
-  console.error("Unable to connect to the database:", error);
-}
 // Setup static folder
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -45,4 +39,10 @@ app.use("/api/auth", posts);
 // Error Handler Middleware
 app.use(notFound);
 app.use(errorHandler);
-app.listen(port, () => console.log(`Server is running at port ${port}`));
+try {
+  await sequelize.authenticate();
+  console.log("Connection has been established successfully.");
+  app.listen(port, () => console.log(`Server is running at port ${port}`));
+} catch (error) {
+  console.error("Unable to connect to the database:", error);
+}

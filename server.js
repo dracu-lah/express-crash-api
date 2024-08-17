@@ -20,7 +20,7 @@ import posts from "./routes/posts.js";
 import errorHandler from "./middleware/error.js";
 import logger from "./middleware/logger.js";
 import notFound from "./middleware/notFound.js";
-import sequelize from "./sequelize.js";
+import sequelize from "./config/sequelize.js";
 
 try {
   await sequelize.authenticate();

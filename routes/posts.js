@@ -10,7 +10,8 @@ import authenticateToken from "../middleware/authenticateToken.js";
 const router = express.Router();
 
 // Get all posts
-router.get("/", authenticateToken, getPosts);
+// router.get("/", authenticateToken, getPosts);
+router.get("/", getPosts);
 
 // Get single post
 router.get("/:id", getPost);

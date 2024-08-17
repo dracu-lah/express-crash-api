@@ -3,14 +3,14 @@ import swaggerUi from "swagger-ui-express";
 import { readFile } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
-
+import cors from "cors";
 // Get the __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const port = process.env.PORT || 8000;
 const app = express();
-
+app.use(cors);
 const filePath = path.join(__dirname, "./swagger-output.json");
 const swaggerDocument = JSON.parse(await readFile(filePath, "utf8"));
 

@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 
 const port = process.env.PORT || 8000;
 const app = express();
-app.use(cors);
+app.use(cors());
 const filePath = path.join(__dirname, "./swagger-output.json");
 const swaggerDocument = JSON.parse(await readFile(filePath, "utf8"));
 
@@ -20,7 +20,14 @@ import posts from "./routes/posts.js";
 import errorHandler from "./middleware/error.js";
 import logger from "./middleware/logger.js";
 import notFound from "./middleware/notFound.js";
+import sequelize from "./sequelize.js";
 
+try {
+  await sequelize.authenticate();
+  console.log("Connection has been established successfully.");
+} catch (error) {
+  console.error("Unable to connect to the database:", error);
+}
 // Setup static folder
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -38,5 +45,4 @@ app.use("/api/auth", posts);
 // Error Handler Middleware
 app.use(notFound);
 app.use(errorHandler);
-
 app.listen(port, () => console.log(`Server is running at port ${port}`));
